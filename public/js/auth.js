@@ -9,6 +9,10 @@
   }
 })();
 
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? ''
+  : 'https://income-tracker-backend-1411.onrender.com';
+
 // ─── Tab switching ────────────────────────────────────────────
 function switchTab(tab) {
   const isLogin = tab === 'login';
@@ -46,7 +50,7 @@ async function handleLogin(e) {
   setLoading(btn, btnText, spinner, true);
 
   try {
-    const res  = await fetch('/api/auth/login', {
+    const res  = await fetch(`${API_BASE_URL}/api/auth/login`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ email, password }),
@@ -96,7 +100,7 @@ async function handleSignup(e) {
   setLoading(btn, btnText, spinner, true);
 
   try {
-    const res  = await fetch('/api/auth/signup', {
+    const res  = await fetch(`${API_BASE_URL}/api/auth/signup`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ name, email, password }),

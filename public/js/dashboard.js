@@ -48,9 +48,13 @@ function setupUserUI() {
   }
 }
 
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? ''
+  : 'https://income-tracker-backend-1411.onrender.com';
+
 // ─── API Helper ───────────────────────────────────────────────
 async function api(path, opts = {}) {
-  const res = await fetch(path, {
+  const res = await fetch(`${API_BASE_URL}${path}`, {
     ...opts,
     headers: {
       'Content-Type':  'application/json',
